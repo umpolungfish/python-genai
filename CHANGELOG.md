@@ -1,5 +1,17 @@
 # Changelog
 
+## [2.7.1](https://github.com/googleapis/python-genai/compare/v2.7.0...v2.7.1) (2026-05-29)
+
+
+### Bug Fixes
+
+* Include all fields of a single tool ([7b1d498](https://github.com/googleapis/python-genai/commit/7b1d4982f4a61def33db8873feb1334416d4a0e4))
+
+
+### Documentation
+
+* Update the docs for 2.7 ([bbef98e](https://github.com/googleapis/python-genai/commit/bbef98e64ebf6e12a5ab1aba02302a28ca1faf4f))
+
 ## [2.7.0](https://github.com/googleapis/python-genai/compare/v2.6.0...v2.7.0) (2026-05-27)
 
 
