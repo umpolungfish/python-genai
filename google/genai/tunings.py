@@ -137,6 +137,27 @@ def _CancelTuningJobResponse_from_vertex(
   return to_object
 
 
+def _CodeExecutionResult_to_vertex(
+    from_object: Union[dict[str, Any], object],
+    parent_object: Optional[dict[str, Any]] = None,
+    root_object: Optional[Union[dict[str, Any], object]] = None,
+) -> dict[str, Any]:
+  to_object: dict[str, Any] = {}
+  if getv(from_object, ['outcome']) is not None:
+    setv(to_object, ['outcome'], getv(from_object, ['outcome']))
+
+  if getv(from_object, ['output']) is not None:
+    setv(to_object, ['output'], getv(from_object, ['output']))
+
+  if getv(from_object, ['id']) is not None:
+    raise ValueError(
+        'id parameter is only supported in Gemini Developer API mode, not in'
+        ' Gemini Enterprise Agent Platform mode.'
+    )
+
+  return to_object
+
+
 def _CompositeReinforcementTuningRewardConfigWeightedRewardConfig_to_vertex(
     from_object: Union[dict[str, Any], object],
     parent_object: Optional[dict[str, Any]] = None,
@@ -175,6 +196,28 @@ def _CompositeReinforcementTuningRewardConfig_to_vertex(
             for item in getv(from_object, ['weighted_reward_configs'])
         ],
     )
+
+  return to_object
+
+
+def _Content_to_vertex(
+    from_object: Union[dict[str, Any], object],
+    parent_object: Optional[dict[str, Any]] = None,
+    root_object: Optional[Union[dict[str, Any], object]] = None,
+) -> dict[str, Any]:
+  to_object: dict[str, Any] = {}
+  if getv(from_object, ['parts']) is not None:
+    setv(
+        to_object,
+        ['parts'],
+        [
+            _Part_to_vertex(item, to_object, root_object)
+            for item in getv(from_object, ['parts'])
+        ],
+    )
+
+  if getv(from_object, ['role']) is not None:
+    setv(to_object, ['role'], getv(from_object, ['role']))
 
   return to_object
 
@@ -996,6 +1039,27 @@ def _EvaluationConfig_to_vertex(
   return to_object
 
 
+def _ExecutableCode_to_vertex(
+    from_object: Union[dict[str, Any], object],
+    parent_object: Optional[dict[str, Any]] = None,
+    root_object: Optional[Union[dict[str, Any], object]] = None,
+) -> dict[str, Any]:
+  to_object: dict[str, Any] = {}
+  if getv(from_object, ['code']) is not None:
+    setv(to_object, ['code'], getv(from_object, ['code']))
+
+  if getv(from_object, ['language']) is not None:
+    setv(to_object, ['language'], getv(from_object, ['language']))
+
+  if getv(from_object, ['id']) is not None:
+    raise ValueError(
+        'id parameter is only supported in Gemini Developer API mode, not in'
+        ' Gemini Enterprise Agent Platform mode.'
+    )
+
+  return to_object
+
+
 def _GenerationConfig_from_vertex(
     from_object: Union[dict[str, Any], object],
     parent_object: Optional[dict[str, Any]] = None,
@@ -1335,6 +1399,88 @@ def _MultiSpeakerVoiceConfig_to_vertex(
   return to_object
 
 
+def _Part_to_vertex(
+    from_object: Union[dict[str, Any], object],
+    parent_object: Optional[dict[str, Any]] = None,
+    root_object: Optional[Union[dict[str, Any], object]] = None,
+) -> dict[str, Any]:
+  to_object: dict[str, Any] = {}
+  if getv(from_object, ['media_resolution']) is not None:
+    setv(
+        to_object, ['mediaResolution'], getv(from_object, ['media_resolution'])
+    )
+
+  if getv(from_object, ['code_execution_result']) is not None:
+    setv(
+        to_object,
+        ['codeExecutionResult'],
+        _CodeExecutionResult_to_vertex(
+            getv(from_object, ['code_execution_result']), to_object, root_object
+        ),
+    )
+
+  if getv(from_object, ['executable_code']) is not None:
+    setv(
+        to_object,
+        ['executableCode'],
+        _ExecutableCode_to_vertex(
+            getv(from_object, ['executable_code']), to_object, root_object
+        ),
+    )
+
+  if getv(from_object, ['file_data']) is not None:
+    setv(to_object, ['fileData'], getv(from_object, ['file_data']))
+
+  if getv(from_object, ['function_call']) is not None:
+    setv(to_object, ['functionCall'], getv(from_object, ['function_call']))
+
+  if getv(from_object, ['function_response']) is not None:
+    setv(
+        to_object,
+        ['functionResponse'],
+        getv(from_object, ['function_response']),
+    )
+
+  if getv(from_object, ['inline_data']) is not None:
+    setv(to_object, ['inlineData'], getv(from_object, ['inline_data']))
+
+  if getv(from_object, ['text']) is not None:
+    setv(to_object, ['text'], getv(from_object, ['text']))
+
+  if getv(from_object, ['thought']) is not None:
+    setv(to_object, ['thought'], getv(from_object, ['thought']))
+
+  if getv(from_object, ['thought_signature']) is not None:
+    setv(
+        to_object,
+        ['thoughtSignature'],
+        getv(from_object, ['thought_signature']),
+    )
+
+  if getv(from_object, ['video_metadata']) is not None:
+    setv(to_object, ['videoMetadata'], getv(from_object, ['video_metadata']))
+
+  if getv(from_object, ['tool_call']) is not None:
+    raise ValueError(
+        'tool_call parameter is only supported in Gemini Developer API mode,'
+        ' not in Gemini Enterprise Agent Platform mode.'
+    )
+
+  if getv(from_object, ['tool_response']) is not None:
+    raise ValueError(
+        'tool_response parameter is only supported in Gemini Developer API'
+        ' mode, not in Gemini Enterprise Agent Platform mode.'
+    )
+
+  if getv(from_object, ['part_metadata']) is not None:
+    raise ValueError(
+        'part_metadata parameter is only supported in Gemini Developer API'
+        ' mode, not in Gemini Enterprise Agent Platform mode.'
+    )
+
+  return to_object
+
+
 def _ReinforcementTuningAutoraterScorer_to_vertex(
     from_object: Union[dict[str, Any], object],
     parent_object: Optional[dict[str, Any]] = None,
@@ -1347,6 +1493,63 @@ def _ReinforcementTuningAutoraterScorer_to_vertex(
         ['autoraterConfig'],
         _AutoraterConfig_to_vertex(
             getv(from_object, ['autorater_config']), to_object, root_object
+        ),
+    )
+
+  if getv(from_object, ['autorater_prompt']) is not None:
+    setv(
+        to_object, ['autoraterPrompt'], getv(from_object, ['autorater_prompt'])
+    )
+
+  if getv(from_object, ['autorater_response_parse_config']) is not None:
+    setv(
+        to_object,
+        ['autoraterResponseParseConfig'],
+        getv(from_object, ['autorater_response_parse_config']),
+    )
+
+  if getv(from_object, ['parsed_response_conversion_scorer']) is not None:
+    setv(
+        to_object,
+        ['parsedResponseConversionScorer'],
+        getv(from_object, ['parsed_response_conversion_scorer']),
+    )
+
+  if getv(from_object, ['exact_match_scorer']) is not None:
+    setv(
+        to_object,
+        ['exactMatchScorer'],
+        getv(from_object, ['exact_match_scorer']),
+    )
+
+  return to_object
+
+
+def _ReinforcementTuningExample_to_vertex(
+    from_object: Union[dict[str, Any], object],
+    parent_object: Optional[dict[str, Any]] = None,
+    root_object: Optional[Union[dict[str, Any], object]] = None,
+) -> dict[str, Any]:
+  to_object: dict[str, Any] = {}
+  if getv(from_object, ['contents']) is not None:
+    setv(
+        to_object,
+        ['contents'],
+        [
+            _Content_to_vertex(item, to_object, root_object)
+            for item in getv(from_object, ['contents'])
+        ],
+    )
+
+  if getv(from_object, ['references']) is not None:
+    setv(to_object, ['references'], getv(from_object, ['references']))
+
+  if getv(from_object, ['system_instruction']) is not None:
+    setv(
+        to_object,
+        ['systemInstruction'],
+        _Content_to_vertex(
+            getv(from_object, ['system_instruction']), to_object, root_object
         ),
     )
 
@@ -1397,6 +1600,37 @@ def _SingleReinforcementTuningRewardConfig_to_vertex(
         _ReinforcementTuningAutoraterScorer_to_vertex(
             getv(from_object, ['autorater_scorer']), to_object, root_object
         ),
+    )
+
+  if getv(from_object, ['reward_name']) is not None:
+    setv(to_object, ['rewardName'], getv(from_object, ['reward_name']))
+
+  if getv(from_object, ['parse_response_config']) is not None:
+    setv(
+        to_object,
+        ['parseResponseConfig'],
+        getv(from_object, ['parse_response_config']),
+    )
+
+  if getv(from_object, ['code_execution_reward_scorer']) is not None:
+    setv(
+        to_object,
+        ['codeExecutionRewardScorer'],
+        getv(from_object, ['code_execution_reward_scorer']),
+    )
+
+  if getv(from_object, ['string_match_reward_scorer']) is not None:
+    setv(
+        to_object,
+        ['stringMatchRewardScorer'],
+        getv(from_object, ['string_match_reward_scorer']),
+    )
+
+  if getv(from_object, ['cloud_run_reward_scorer']) is not None:
+    setv(
+        to_object,
+        ['cloudRunRewardScorer'],
+        getv(from_object, ['cloud_run_reward_scorer']),
     )
 
   return to_object
@@ -1847,6 +2081,83 @@ def _TuningValidationDataset_to_vertex(
         to_object,
         ['validationDatasetUri'],
         getv(from_object, ['vertex_dataset_resource']),
+    )
+
+  return to_object
+
+
+def _ValidateReinforcementTuningRewardParametersPrivate_to_vertex(
+    from_object: Union[dict[str, Any], object],
+    parent_object: Optional[dict[str, Any]] = None,
+    root_object: Optional[Union[dict[str, Any], object]] = None,
+) -> dict[str, Any]:
+  to_object: dict[str, Any] = {}
+  if getv(from_object, ['parent']) is not None:
+    setv(to_object, ['_url', 'parent'], getv(from_object, ['parent']))
+
+  if getv(from_object, ['sample_response']) is not None:
+    setv(
+        to_object,
+        ['sampleResponse'],
+        _Content_to_vertex(
+            getv(from_object, ['sample_response']), to_object, root_object
+        ),
+    )
+
+  if getv(from_object, ['example']) is not None:
+    setv(
+        to_object,
+        ['example'],
+        _ReinforcementTuningExample_to_vertex(
+            getv(from_object, ['example']), to_object, root_object
+        ),
+    )
+
+  if getv(from_object, ['single_reward_config']) is not None:
+    setv(
+        to_object,
+        ['singleRewardConfig'],
+        _SingleReinforcementTuningRewardConfig_to_vertex(
+            getv(from_object, ['single_reward_config']), to_object, root_object
+        ),
+    )
+
+  if getv(from_object, ['composite_reward_config']) is not None:
+    setv(
+        to_object,
+        ['compositeRewardConfig'],
+        _CompositeReinforcementTuningRewardConfig_to_vertex(
+            getv(from_object, ['composite_reward_config']),
+            to_object,
+            root_object,
+        ),
+    )
+
+  return to_object
+
+
+def _ValidateReinforcementTuningRewardResponse_from_vertex(
+    from_object: Union[dict[str, Any], object],
+    parent_object: Optional[dict[str, Any]] = None,
+    root_object: Optional[Union[dict[str, Any], object]] = None,
+) -> dict[str, Any]:
+  to_object: dict[str, Any] = {}
+  if getv(from_object, ['sdkHttpResponse']) is not None:
+    setv(
+        to_object, ['sdk_http_response'], getv(from_object, ['sdkHttpResponse'])
+    )
+
+  if getv(from_object, ['overallReward']) is not None:
+    setv(to_object, ['overall_reward'], getv(from_object, ['overallReward']))
+
+  if getv(from_object, ['error']) is not None:
+    setv(to_object, ['error'], getv(from_object, ['error']))
+
+  if getv(from_object, ['rewardInfoDetails']) is not None:
+    setv(
+        to_object,
+        ['reward_info_details'],
+        {k: v for k, v in getv(from_object, ['rewardInfoDetails']).items()},
     )
 
   return to_object
@@ -2319,6 +2630,133 @@ class Tunings(_api_module.BaseModule):
         }
         if getattr(parameter_model, 'config', None)
         else {},
+    )
+    return_value.sdk_http_response = types.HttpResponse(
+        headers=response.headers
+    )
+    self._api_client._verify_response(return_value)
+    return return_value
+
+  def validate_reinforcement_tuning_reward(
+      self,
+      *,
+      parent: str,
+      sample_response: types.ContentOrDict,
+      example: types.ReinforcementTuningExampleOrDict,
+      single_reward_config: Optional[
+          types.SingleReinforcementTuningRewardConfigOrDict
+      ] = None,
+      composite_reward_config: Optional[
+          types.CompositeReinforcementTuningRewardConfigOrDict
+      ] = None,
+      config: Optional[
+          types.ValidateReinforcementTuningRewardConfigOrDict
+      ] = None,
+  ) -> types.ValidateReinforcementTuningRewardResponse:
+    """Validates a reinforcement tuning reward configuration.
+
+    Allows users to validate a reward configuration against a sample response
+    and example before creating a reinforcement tuning job, so that they can
+    iterate on the reward configuration without having to create a tuning job
+    each time.
+
+    Args:
+      parent: The resource name of the Location to validate the reward in, e.g.
+        `projects/{project}/locations/{location}`.
+      sample_response: The sample response for validating the reward
+        configuration.
+      example: The example to validate the reward configuration.
+      single_reward_config: Single reward function configuration for
+        reinforcement tuning. Mutually exclusive with composite_reward_config.
+      composite_reward_config: Composite reward function configuration for
+        reinforcement tuning. Mutually exclusive with single_reward_config.
+      config: Optional parameters for the request.
+
+    Returns:
+      A ValidateReinforcementTuningRewardResponse with the computed reward(s).
+    """
+
+    parameter_model = types._ValidateReinforcementTuningRewardParametersPrivate(
+        parent=parent,
+        sample_response=sample_response,
+        example=example,
+        single_reward_config=single_reward_config,
+        composite_reward_config=composite_reward_config,
+        config=config,
+    )
+
+    request_url_dict: Optional[dict[str, str]]
+    if not self._api_client.vertexai:
+      raise ValueError(
+          'This method is only supported in Gemini Enterprise Agent Platform'
+          ' mode, not in Gemini Developer API mode.'
+      )
+    else:
+      request_dict = (
+          _ValidateReinforcementTuningRewardParametersPrivate_to_vertex(
+              parameter_model, None, parameter_model
+          )
+      )
+      request_url_dict = request_dict.get('_url')
+      if request_url_dict:
+        path = (
+            '{parent}/tuningJobs:validateReinforcementTuningReward'.format_map(
+                request_url_dict
+            )
+        )
+      else:
+        path = '{parent}/tuningJobs:validateReinforcementTuningReward'
+
+    query_params = request_dict.get('_query')
+    if query_params:
+      path = f'{path}?{urlencode(query_params)}'
+    # TODO: remove the hack that pops config.
+    request_dict.pop('config', None)
+
+    http_options: Optional[types.HttpOptions] = None
+    if (
+        parameter_model.config is not None
+        and parameter_model.config.http_options is not None
+    ):
+      http_options = parameter_model.config.http_options
+
+    request_dict = _common.convert_to_dict(request_dict)
+    request_dict = _common.encode_unserializable_types(request_dict)
+
+    response = self._api_client.request(
+        'post', path, request_dict, http_options
+    )
+
+    response_dict = {} if not response.body else json.loads(response.body)
+
+    if self._api_client.vertexai:
+      response_dict = _ValidateReinforcementTuningRewardResponse_from_vertex(
+          response_dict, None, parameter_model
+      )
+
+    return_value = (
+        types.ValidateReinforcementTuningRewardResponse._from_response(
+            response=response_dict,
+            kwargs={
+                'config': {
+                    'response_schema': (
+                        getattr(parameter_model.config, 'response_schema', None)
+                    ),
+                    'response_json_schema': (
+                        getattr(
+                            parameter_model.config, 'response_json_schema', None
+                        )
+                    ),
+                    'include_all_fields': (
+                        getattr(
+                            parameter_model.config, 'include_all_fields', None
+                        )
+                    ),
+                }
+            }
+            if getattr(parameter_model, 'config', None)
+            else {},
+        )
     )
     return_value.sdk_http_response = types.HttpResponse(
         headers=response.headers
@@ -2899,6 +3337,133 @@ class AsyncTunings(_api_module.BaseModule):
         }
         if getattr(parameter_model, 'config', None)
         else {},
+    )
+    return_value.sdk_http_response = types.HttpResponse(
+        headers=response.headers
+    )
+    self._api_client._verify_response(return_value)
+    return return_value
+
+  async def validate_reinforcement_tuning_reward(
+      self,
+      *,
+      parent: str,
+      sample_response: types.ContentOrDict,
+      example: types.ReinforcementTuningExampleOrDict,
+      single_reward_config: Optional[
+          types.SingleReinforcementTuningRewardConfigOrDict
+      ] = None,
+      composite_reward_config: Optional[
+          types.CompositeReinforcementTuningRewardConfigOrDict
+      ] = None,
+      config: Optional[
+          types.ValidateReinforcementTuningRewardConfigOrDict
+      ] = None,
+  ) -> types.ValidateReinforcementTuningRewardResponse:
+    """Validates a reinforcement tuning reward configuration.
+
+    Allows users to validate a reward configuration against a sample response
+    and example before creating a reinforcement tuning job, so that they can
+    iterate on the reward configuration without having to create a tuning job
+    each time.
+
+    Args:
+      parent: The resource name of the Location to validate the reward in, e.g.
+        `projects/{project}/locations/{location}`.
+      sample_response: The sample response for validating the reward
+        configuration.
+      example: The example to validate the reward configuration.
+      single_reward_config: Single reward function configuration for
+        reinforcement tuning. Mutually exclusive with composite_reward_config.
+      composite_reward_config: Composite reward function configuration for
+        reinforcement tuning. Mutually exclusive with single_reward_config.
+      config: Optional parameters for the request.
+
+    Returns:
+      A ValidateReinforcementTuningRewardResponse with the computed reward(s).
+    """
+
+    parameter_model = types._ValidateReinforcementTuningRewardParametersPrivate(
+        parent=parent,
+        sample_response=sample_response,
+        example=example,
+        single_reward_config=single_reward_config,
+        composite_reward_config=composite_reward_config,
+        config=config,
+    )
+
+    request_url_dict: Optional[dict[str, str]]
+    if not self._api_client.vertexai:
+      raise ValueError(
+          'This method is only supported in Gemini Enterprise Agent Platform'
+          ' mode, not in Gemini Developer API mode.'
+      )
+    else:
+      request_dict = (
+          _ValidateReinforcementTuningRewardParametersPrivate_to_vertex(
+              parameter_model, None, parameter_model
+          )
+      )
+      request_url_dict = request_dict.get('_url')
+      if request_url_dict:
+        path = (
+            '{parent}/tuningJobs:validateReinforcementTuningReward'.format_map(
+                request_url_dict
+            )
+        )
+      else:
+        path = '{parent}/tuningJobs:validateReinforcementTuningReward'
+
+    query_params = request_dict.get('_query')
+    if query_params:
+      path = f'{path}?{urlencode(query_params)}'
+    # TODO: remove the hack that pops config.
+    request_dict.pop('config', None)
+
+    http_options: Optional[types.HttpOptions] = None
+    if (
+        parameter_model.config is not None
+        and parameter_model.config.http_options is not None
+    ):
+      http_options = parameter_model.config.http_options
+
+    request_dict = _common.convert_to_dict(request_dict)
+    request_dict = _common.encode_unserializable_types(request_dict)
+
+    response = await self._api_client.async_request(
+        'post', path, request_dict, http_options
+    )
+
+    response_dict = {} if not response.body else json.loads(response.body)
+
+    if self._api_client.vertexai:
+      response_dict = _ValidateReinforcementTuningRewardResponse_from_vertex(
+          response_dict, None, parameter_model
+      )
+
+    return_value = (
+        types.ValidateReinforcementTuningRewardResponse._from_response(
+            response=response_dict,
+            kwargs={
+                'config': {
+                    'response_schema': (
+                        getattr(parameter_model.config, 'response_schema', None)
+                    ),
+                    'response_json_schema': (
+                        getattr(
+                            parameter_model.config, 'response_json_schema', None
+                        )
+                    ),
+                    'include_all_fields': (
+                        getattr(
+                            parameter_model.config, 'include_all_fields', None
+                        )
+                    ),
+                }
+            }
+            if getattr(parameter_model, 'config', None)
+            else {},
+        )
     )
     return_value.sdk_http_response = types.HttpResponse(
         headers=response.headers
